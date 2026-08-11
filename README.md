@@ -1,29 +1,97 @@
-# Mon Super Parcours en Ville 🚶‍♂️📍
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Itinéraire Urbain</title>
+    <!-- Chargement des outils de carte Leaflet (Gratuit, libre, sans inscription) -->
+    <link rel="stylesheet" href="https://unpkg.com" />
+    <script src="https://unpkg.com"></script>
+    <!-- Plugin pour lire directement les fichiers GPX -->
+    <script src="https://cloudflare.com"></script>
 
-Bienvenue sur ce petit itinéraire de découverte !
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #24292f; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.5; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #d0d7de; padding: 12px; text-align: left; }
+        th { background-color: #f6f8fa; }
+        /* Style de la carte intégrée */
+        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; }
+        .btn-download { display: inline-block; background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
+        .step-img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
+    </style>
+</head>
+<body>
 
-| 📊 Informations | Parcours Urbain |
-| :--- | :--- |
-| **📍 Départ / Arrivée** | Piste de Luge |
-| **🚶‍♂️ Distance** | pas trop de kilomètres |
-| **⏱️ Durée estimée** | Environ 1/2 heure |
-| **📈 Difficulté** | Très facile (accessible aux poussettes) |
-| **✨ Points forts** | Monuments historiques, fontaines, zones ombragées |
+    <h1>Mon Super Parcours en Ville 🚶‍♂️📍</h1>
+    <p>Bienvenue sur ce petit itinéraire de découverte !</p>
 
-### 🗺️ Choisissez votre format d'itinéraire
+    <table>
+        <thead>
+            <tr>
+                <th>📊 Informations</th>
+                <th>Parcours Urbain</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>📍 Départ / Arrivée</strong></td><td>Place de la Mairie / Parc Central</td></tr>
+            <tr><td><strong>🚶‍♂️ Distance</strong></td><td>3,5 kilomètres</td></tr>
+            <tr><td><strong>⏱️ Durée estimée</strong></td><td>Environ 1 heure</td></tr>
+            <tr><td><strong>📈 Difficulté</strong></td><td>Très facile (accessible aux poussettes)</td></tr>
+            <tr><td><strong>✨ Points forts</strong></td><td>Monuments historiques, fontaines, zones ombragées</td></tr>
+        </tbody>
+    </table>
 
-Pour suivre le parcours en ville, choisissez l'option qui vous convient le mieux :
+    <h3>🗺️ Votre Carte Interactive Directe</h3>
+    
+    <!-- La carte s'affiche ici automatiquement sans aucune publicité ni inscription -->
+    <div id="map"></div>
 
-<a href="https://openstreetmap.fr" target="_blank" style="display:inline-block; background-color:#0078A8; color:white; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold; margin-right:10px;">🗺️ Voir la Carte Interactive</a>
-<a href="./TestGH.gpx" download style="display:inline-block; background-color:#21262d; color:#c9d1d9; border:1px solid #30363d; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold;">📥 Télécharger le fichier GPX</a>
+    <p>
+        <a href="./TestGH.gpx" download class="btn-download">📥 Télécharger le fichier GPX pour votre montre/GPS</a>
+    </p>
 
-<br><br>
-💡 *L'option **Carte Interactive** ouvre le tracé sur un fond de carte libre sans aucune inscription requise. L'option **GPX** est idéale pour importer le tracé dans votre application de guidage préférée (Visorando, Komoot, Strava, etc.).*
+    <hr>
 
-## Étape 1 : La Place Centrale
-Voici le point de départ du parcours. Admirez l'architecture du siècle dernier.
-![Photo de la place](etape1.webp)
+    <h2>Étape 1 : La Place Centrale</h2>
+    <p>Voici le point de départ du parcours. Admirez l'architecture du siècle dernier.</p>
+    <img src="etape1.webp" alt="Photo de la place" class="step-img">
 
-## Étape 2 : Le Parc Historique
-Un endroit parfait pour une petite pause à l'ombre.
-![Photo du parc](etape2.jpeg)
+    <h2>Étape 2 : Le Parc Historique</h2>
+    <p>Un endroit parfait pour une petite pause à l'ombre.</p>
+    <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
+
+    <!-- Script de configuration de la carte -->
+    <script>
+        // 1. Initialisation de la carte (vue par défaut)
+        var map = L.map('map');
+
+        // 2. Chargement du fond de carte OpenStreetMap classique
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 3. Lecture automatique de votre fichier GPX local
+        // Le script calcule tout seul le centrage et le zoom par rapport à vos coordonnées
+        var gpxFile = './TestGH.gpx'; 
+        
+        new L.GPX(gpxFile, {
+            async: true,
+            marker_options: {
+                startIconUrl: 'https://cloudflare.com',
+                endIconUrl: 'https://cloudflare.com',
+                shadowUrl: 'https://cloudflare.com'
+            },
+            polyline_options: {
+                color: '#0078A8',
+                opacity: 0.8,
+                weight: 5,
+                lineCap: 'round'
+            }
+        }).on('loaded', function(e) {
+            // Ajuste automatiquement la vue de la carte autour de votre tracé
+            map.fitBounds(e.target.getBounds());
+        }).addTo(map);
+    </script>
+</body>
+</html>
