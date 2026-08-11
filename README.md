@@ -2,6 +2,16 @@
 
 Bienvenue sur ce petit itinéraire de découverte !
 
+
+| 📊 Informations | Parcours Urbain |
+| :--- | :--- |
+| **📍 Départ / Arrivée** | Place de la Mairie / Parc Central |
+| **🚶‍♂️ Distance** | 3,5 kilomètres |
+| **⏱️ Durée estimée** | Environ 1 heure |
+| **📈 Difficulté** | Très facile (accessible aux poussettes) |
+| **✨ Points forts** | Monuments historiques, fontaines, zones ombragées |
+
+
 ### 🗺️ Choisissez votre format d'itinéraire
 
 Pour suivre le parcours en ville, choisissez l'option qui vous convient le mieux :
