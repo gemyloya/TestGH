@@ -1,29 +1,18 @@
 # Mon Super Parcours en Ville 🚶‍♂️📍
 
-Bienvenue sur ce petit itinéraire de découverte !
-
 | 📊 Informations | Parcours Urbain |
 | :--- | :--- |
 | **📍 Départ / Arrivée** | Place de la Mairie / Parc Central |
-| **🚶‍♂️ Distance** | 3,5 kilomètres |
-| **⏱️ Durée estimée** | Environ 1 heure |
-| **📈 Difficulté** | Très facile (accessible aux poussettes) |
-| **✨ Points forts** | Monuments historiques, fontaines, zones ombragées |
+| **🚶‍♂️ Distance** | 3,5 km |
+| **⏱️ Durée** | ~ 1h |
 
-### 🗺️ Choisissez votre format d'itinéraire
+### 🗺️ Carte et Tracé
 
-Pour suivre le parcours en ville, choisissez l'option qui vous convient le mieux :
+<a href="https://geojson.io" target="_blank" style="display:inline-block; background-color:#238636; color:white; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold; margin-right:10px;">🗺️ Voir la Carte Interactive</a>
+<a href="./TestGH.gpx" download style="display:inline-block; background-color:#21262d; color:#c9d1d9; border:1px solid #30363d; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold;">📥 Fichier GPX</a>
 
-<a href="https://github.com" style="display:inline-block; background-color:#238636; color:white; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold; margin-right:10px;">🗺️ Voir la Carte Interactive (GeoJSON)</a>
-<a href="./TestGH.gpx" download style="display:inline-block; background-color:#21262d; color:#c9d1d9; border:1px solid #30363d; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold;">📥 Télécharger le fichier GPX</a>
+*Cliquez sur le bouton vert pour visualiser le parcours en ligne.*
 
-<br><br>
-💡 *L'option **GeoJSON** ouvre une carte interactive directement sur GitHub. L'option **GPX** est idéale pour importer le tracé dans votre application de guidage préférée (Visorando, Komoot, Strava, etc.).*
-
-## Étape 1 : La Place Centrale
-Voici le point de départ du parcours. Admirez l'architecture du siècle dernier.
-![Photo de la place](etape1.webp)
-
-## Étape 2 : Le Parc Historique
-Un endroit parfait pour une petite pause à l'ombre.
-![Photo du parc](etape2.jpeg)
+## Étapes
+1.  **Place Centrale** (Départ)
+2.  **Parc Historique** (Pause)
