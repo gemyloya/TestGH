@@ -2,7 +2,6 @@
 
 Bienvenue sur ce petit itinéraire de découverte !
 
-
 | 📊 Informations | Parcours Urbain |
 | :--- | :--- |
 | **📍 Départ / Arrivée** | Place de la Mairie / Parc Central |
@@ -11,17 +10,15 @@ Bienvenue sur ce petit itinéraire de découverte !
 | **📈 Difficulté** | Très facile (accessible aux poussettes) |
 | **✨ Points forts** | Monuments historiques, fontaines, zones ombragées |
 
-
 ### 🗺️ Choisissez votre format d'itinéraire
 
 Pour suivre le parcours en ville, choisissez l'option qui vous convient le mieux :
 
-<a href="./itineraire.geojson" style="display:inline-block; background-color:#238636; color:white; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold; margin-right:10px;">🗺️ Voir la Carte Interactive (GeoJSON)</a>
+<a href="https://github.com" style="display:inline-block; background-color:#238636; color:white; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold; margin-right:10px;">🗺️ Voir la Carte Interactive (GeoJSON)</a>
 <a href="./TestGH.gpx" download style="display:inline-block; background-color:#21262d; color:#c9d1d9; border:1px solid #30363d; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold;">📥 Télécharger le fichier GPX</a>
 
 <br><br>
-💡 *L'option **GeoJSON** ouvre une carte directement dans votre navigateur. L'option **GPX** est idéale pour importer le tracé dans votre application de guidage préférée (Visorando, Komoot, Strava, etc.).*
-
+💡 *L'option **GeoJSON** ouvre une carte interactive directement sur GitHub. L'option **GPX** est idéale pour importer le tracé dans votre application de guidage préférée (Visorando, Komoot, Strava, etc.).*
 
 ## Étape 1 : La Place Centrale
 Voici le point de départ du parcours. Admirez l'architecture du siècle dernier.
