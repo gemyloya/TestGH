@@ -47,6 +47,7 @@
 
     <h3>🗺️ Votre Carte Interactive Directe</h3>
 
+    <!-- Emplacement de la carte -->
     <div id="map"></div>
 
     <p>
@@ -63,7 +64,7 @@
     <p>Un endroit parfait pour une petite pause à l'ombre.</p>
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
-    <!-- Script de configuration de la carte (placé en bas pour attendre le chargement du HTML) -->
+    <!-- Script de configuration de la carte (sécurisé contre les bugs d'affichage) -->
     <script>
         // 1. Initialisation de la carte
         var map = L.map('map');
@@ -73,7 +74,7 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // 3. Lecture automatique de votre fichier GPX local
+        // 3. Lecture automatique du fichier GPX local
         var gpxFile = './TestGH.gpx'; 
         
         new L.GPX(gpxFile, {
@@ -85,8 +86,11 @@
                 lineCap: 'round'
             }
         }).on('loaded', function(e) {
-            // Ajuste la carte au tracé
-            map.fitBounds(e.target.getBounds());
+            // Sécurité pour forcer Leaflet à recalculer sa taille et éviter l'écran vide
+            setTimeout(function() {
+                map.invalidateSize();
+                map.fitBounds(e.target.getBounds());
+            }, 100);
         }).addTo(map);
     </script>
 </body>
