@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Itinéraire Urbain</title> 
 
-    <!-- 1. CSS de Leaflet (Évite que la carte soit brisée visuellement) -->
+    <!-- 1. CSS de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com" />
 
     <!-- 2. Script JavaScript de Leaflet -->
     <script src="https://unpkg.com"></script>
 
-    <!-- 3. Script Leaflet-GPX pour lire votre fichier de tracé -->
+    <!-- 3. Script Leaflet-GPX -->
     <script src="https://cloudflare.com"></script>
 
     <style>
@@ -19,7 +19,7 @@
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { border: 1px solid #d0d7de; padding: 12px; text-align: left; }
         th { background-color: #f6f8fa; }
-        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; }
+        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; background-color: #e5e3df; }
         .btn-download { display: inline-block; background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
         .step-img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
     </style>
@@ -47,7 +47,6 @@
 
     <h3>🗺️ Votre Carte Interactive Directe</h3>
 
-    <!-- Emplacement de la carte -->
     <div id="map"></div>
 
     <p>
@@ -64,17 +63,16 @@
     <p>Un endroit parfait pour une petite pause à l'ombre.</p>
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
-    <!-- Script de configuration de la carte (sécurisé contre les bugs d'affichage) -->
     <script>
-        // 1. Initialisation de la carte
-        var map = L.map('map');
+        // 1. On donne des coordonnées de base pour forcer la carte à s'afficher (ici Paris)
+        var map = L.map('map').setView([48.8566, 2.3522], 13);
 
-        // 2. Chargement du fond de carte OpenStreetMap
+        // 2. Chargement immédiat du fond de carte
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // 3. Lecture automatique du fichier GPX local
+        // 3. Essai de lecture du fichier GPX
         var gpxFile = './TestGH.gpx'; 
         
         new L.GPX(gpxFile, {
@@ -86,11 +84,10 @@
                 lineCap: 'round'
             }
         }).on('loaded', function(e) {
-            // Sécurité pour forcer Leaflet à recalculer sa taille et éviter l'écran vide
-            setTimeout(function() {
-                map.invalidateSize();
-                map.fitBounds(e.target.getBounds());
-            }, 100);
+            // Si le fichier se charge bien, on recadre la carte dessus
+            map.fitBounds(e.target.getBounds());
+        }).on('error', function(e) {
+            console.error("Erreur de chargement du fichier GPX:", e);
         }).addTo(map);
     </script>
 </body>
