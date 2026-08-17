@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon itinéraire urbain</title> 
+
+    <!-- Importation des outils de cartographie (Serveurs cdnjs stables) -->
+    <link rel="stylesheet" href="https://cloudflare.com" />
+    <script src="https://cloudflare.com"></script>
+
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #24292f; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.5; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { border: 1px solid #d0d7de; padding: 12px; text-align: left; }
         th { background-color: #f6f8fa; }
-        
-        /* Bouton d'accès direct à la carte */
-        .map-btn { display: block; text-align: center; background-color: #0969da; color: white; text-decoration: none; padding: 15px; border-radius: 6px; font-weight: bold; font-size: 16px; margin: 20px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .map-btn:hover { background-color: #0c57d0; }
-        .map-notice { text-align: center; color: #57606a; font-size: 13px; margin-top: -15px; margin-bottom: 20px; }
-        
+        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; }
         .btn-download { display: inline-block; background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
         .step-img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
     </style>
@@ -42,11 +42,8 @@
 
     <h3>🗺️ Votre carte interactive</h3>
 
-    <!-- Lien direct vers le visualiseur de carte externe avec votre fichier brut -->
-    <a href="https://geojson.io" target="_blank" class="map-btn">
-        🗺️ Afficher l'itinéraire sur la carte
-    </a>
-    <p class="map-notice">(S'ouvre instantanément sur tout smartphone, sans inscription ni application à télécharger)</p>
+    <!-- La zone de la carte qui va s'afficher -->
+    <div id="map"></div>
 
     <p>
         <a href="./TestGH.gpx" download class="btn-download">📥 Télécharger le fichier GPX pour votre montre/GPS</a>
@@ -62,5 +59,34 @@
     <p>Un endroit parfait pour une petite pause à l'ombre.</p>
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
+    <script>
+        // 1. Initialisation de la carte centrée par défaut sur vos coordonnées du Crêt-du-Locle
+        var map = L.map('map').setView([47.10143, 6.839778], 15);
+
+        // 2. Chargement du fond de carte public CartoDB Voyager
+        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // 3. Intégration directe de VOTRE ligne GeoJSON exacte pour éliminer les bugs de serveurs
+        var donneesGeoJSON = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"LineString","coordinates":[[6.839778,47.10143],[6.840549,47.102059],[6.842261,47.103158],[6.84388,47.10426],[6.843897,47.105095],[6.842841,47.105825],[6.842824,47.105837]]}},{"type":"Feature","properties":{},"geometry":{"type":"LineString","coordinates":[[6.842798,47.105849],[6.842006,47.105999],[6.840294,47.105478],[6.839559,47.105223],[6.839612,47.104736],[6.839561,47.10415],[6.839876,47.103298],[6.839876,47.10295],[6.838982,47.101976],[6.839766,47.101489]]}}]}
+
+        // 4. Lecture et affichage automatique du tracé par Leaflet
+        var coucheTrace = L.geoJSON(donneesGeoJSON, {
+            style: function (feature) {
+                return {
+                    color: '#0078A8',
+                    weight: 5,
+                    opacity: 0.8
+                };
+            }
+        }).addTo(map);
+
+        // 5. Ajustement forcé du zoom sur votre tracé réel
+        setTimeout(function() {
+            map.invalidateSize();
+            map.fitBounds(coucheTrace.getBounds());
+        }, 200);
+    </script>
 </body>
 </html>
