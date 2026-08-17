@@ -1,10 +1,12 @@
 # 🚶‍♂️ Mon Super Parcours en Ville
 
-Bienvenue sur le dépôt de mon itinéraire urbain interactif ! Ce projet permet de visualiser un tracé GPX directement sur une carte interactive et de guider les piétons à travers les points forts de la ville.
+Bienvenue sur la présentation de mon itinéraire urbain ! 
 
-## 🚀 Voir la carte en direct
-Le parcours est consultable en ligne ici : 
-👉 **[Insérer le lien de vos GitHub Pages ici après activation]**
+### 🗺️ Visualiser la Carte Interactive Directement
+Pour voir le tracé de la randonnée en direct sur la carte, cliquez simplement sur le lien officiel de notre fichier de données ci-dessous :
+👉 **[cliquez ici pour ouvrir la carte interactive](./itineraire.geojson)**
+
+---
 
 ## 📊 Informations sur le parcours
 * **📍 Départ / Arrivée :** Place de la Mairie / Parc Central
@@ -12,11 +14,20 @@ Le parcours est consultable en ligne ici :
 * **⏱️ Durée estimée :** Environ 1 heure
 * **📈 Difficulté :** Très facile (accessible aux poussettes)
 
-## 🛠️ Technologies utilisées
-* **HTML5 / CSS3** pour la structure et la mise en page.
-* **[Leaflet.js](https://leafletjs.com)** pour l'affichage de la carte interactive.
-* **[Leaflet-GPX](https://github.com)** pour la lecture et le tracé automatique du fichier GPX.
+---
 
-## 📥 Téléchargement
-Vous pouvez récupérer directement le fichier de tracé `./TestGH.gpx` présent dans ce dépôt pour l'importer sur votre montre connectée ou votre application de randonnée préférée.
- 
+## 📥 Téléchargement pour GPS ou Montre
+Vous pouvez télécharger le fichier brut pour votre application de navigation :
+* [📥 Télécharger le fichier GPX (Montres/GPS)](./TestGH.gpx)
+
+---
+
+## 📸 Les Étapes du Parcours
+
+### Étape 1 : La Place Centrale
+Voici le point de départ du parcours. Admirez l'architecture du siècle dernier.
+![Photo de la place](etape1.webp)
+
+### Étape 2 : Le Parc Historique
+Un endroit parfait pour une petite pause à l'ombre.
+![Photo du parc](etape2.jpeg)
