@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Itinéraire Urbain</title> 
-
-    <!-- Importation sécurisée des cartes via les serveurs officiels cdnjs -->
-    <link rel="stylesheet" href="https://cloudflare.com" />
-    <script src="https://cloudflare.com"></script>
-
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #24292f; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.5; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { border: 1px solid #d0d7de; padding: 12px; text-align: left; }
         th { background-color: #f6f8fa; }
-        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; }
+        
+        /* Style pour la zone de la carte interactive */
+        .map-container { display: block; text-align: center; margin: 20px 0; border: 1px solid #d0d7de; border-radius: 8px; overflow: hidden; position: relative; }
+        .map-link-img { width: 100%; height: auto; display: block; transition: opacity 0.2s; }
+        .map-link-img:hover { opacity: 0.9; }
+        .map-badge { position: absolute; bottom: 15px; right: 15px; background: #0078A8; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
         .btn-download { display: inline-block; background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
         .step-img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
     </style>
@@ -22,7 +23,7 @@
 <body>
 
     <h1>Mon Super Parcours en Ville 🚶‍♂️📍</h1>
-    <p>Bienvenue sur ce petit itinéraire de découverte !</p>
+    <p>Bienvenue sur ce petit itinéraire de découverte à La Chaux-de-Fonds !</p>
 
     <table>
         <thead>
@@ -32,17 +33,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td><strong>📍 Départ / Arrivée</strong></td><td>Place de la Mairie / Parc Central</td></tr>
-            <tr><td><strong>🚶‍♂️ Distance</strong></td><td>3,5 kilomètres</td></tr>
-            <tr><td><strong>⏱️ Durée estimée</strong></td><td>Environ 1 heure</td></tr>
-            <tr><td><strong>📈 Difficulté</strong></td><td>Très facile (accessible aux poussettes)</td></tr>
-            <tr><td><strong>✨ Points forts</strong></td><td>Monuments historiques, fontaines, zones ombragées</td></tr>
+            <tr><td><strong>📍 Départ / Arrivée</strong></td><td>Crêt-du-Locle / Rue Fritz-Courvoisier</td></tr>
+            <tr><td><strong>🚶‍♂️ Distance</strong></td><td>Environ 1,2 kilomètres</td></tr>
+            <tr><td><strong>⏱️ Durée estimée</strong></td><td>Environ 20 minutes</td></tr>
+            <tr><td><strong>📈 Difficulté</strong></td><td>Facile</td></tr>
+            <tr><td><strong>✨ Points forts</strong></td><td>Horlogerie, urbanisme horloger, découverte locale</td></tr>
         </tbody>
     </table>
 
     <h3>🗺️ Votre Carte Interactive Directe</h3>
 
-    <div id="map"></div>
+    <!-- La carte est une image de votre choix, qui ouvre le tracé officiel au clic -->
+    <a href="./itineraire.geojson" class="map-container" title="Cliquez pour ouvrir la carte interactive complète">
+        <img src="https://unsplash.com" alt="Aperçu de la carte du parcours" class="map-link-img">
+        <span class="map-badge">🗺️ Ouvrir la carte interactive</span>
+    </a>
 
     <p>
         <a href="./TestGH.gpx" download class="btn-download">📥 Télécharger le fichier GPX pour votre montre/GPS</a>
@@ -50,46 +55,13 @@
 
     <hr>
 
-    <h2>Étape 1 : La Place Centrale</h2>
-    <p>Voici le point de départ du parcours. Admirez l'architecture du siècle dernier.</p>
+    <h2>Étape 1 : Le Départ</h2>
+    <p>Voici le point de départ du parcours. Suivez le tracé pour découvrir l'histoire de la région.</p>
     <img src="etape1.webp" alt="Photo de la place" class="step-img">
 
     <h2>Étape 2 : Le Parc Historique</h2>
     <p>Un endroit parfait pour une petite pause à l'ombre.</p>
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
-    <script>
-        // 1. Initialisation de la carte (Centrée de base sur vos coordonnées à La Chaux-de-Fonds)
-        var map = L.map('map').setView([47.10143, 6.839778], 15);
-
-        // 2. Chargement du fond de carte public CartoDB Voyager (Totalement compatible GitHub Pages)
-        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-
-        // 3. Vos données réelles réparties en deux segments distincts (Inversion des axes gérée pour Leaflet)
-        var segment1 = [
-            [47.10143, 6.839778], [47.102059, 6.840549], [47.103158, 6.842261], 
-            [47.10426, 6.84388], [47.105095, 6.843897], [47.105825, 6.842841], [47.105837, 6.842824]
-        ];
-
-        var segment2 = [
-            [47.105849, 6.842798], [47.105999, 6.842006], [47.105478, 6.840294], 
-            [47.105223, 6.839859], [47.104736, 6.839612], [47.10415, 6.839561], 
-            [47.103298, 6.839876], [47.10295, 6.839876], [47.101976, 6.838982], [47.101489, 6.839766]
-        ];
-
-        // 4. Création d'un groupe pour réunir vos deux tracés
-        var groupeTraces = L.featureGroup([
-            L.polyline(segment1, { color: '#0078A8', opacity: 0.8, weight: 5 }),
-            L.polyline(segment2, { color: '#0078A8', opacity: 0.8, weight: 5 })
-        ]).addTo(map);
-
-        // 5. Ajustement forcé et sécurisé de la carte sur l'ensemble de votre itinéraire
-        setTimeout(function() {
-            map.invalidateSize();
-            map.fitBounds(groupeTraces.getBounds());
-        }, 300);
-    </script>
 </body>
 </html>
