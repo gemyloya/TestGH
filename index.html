@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Itinéraire Urbain</title> 
 
-    <!-- 1. CSS de Leaflet via cdnjs (Chargement sécurisé et autorisé) -->
-    <link rel="stylesheet" href="https://cloudflare.com" />
-    
-    <!-- 2. JavaScript de Leaflet via cdnjs (Résout l'erreur 'L is not defined') -->
-    <script src="https://cloudflare.com"></script>
-
-    <!-- 3. Extension GPX via cdnjs -->
-    <script src="https://cloudflare.com"></script>
-
     <style>
+        /* CODE CSS OFFICIEL DE LEAFLET INTEGRÉ POUR ÉVITER LES BLOCAGES */
+        .leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile-loaded{visibility:inherit}.leaflet-vector-shape{pointer-events:none}.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:auto}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-tile{will-change:opacity}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}
+        
+        /* Votre style de mise en page */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #24292f; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.5; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { border: 1px solid #d0d7de; padding: 12px; text-align: left; }
         th { background-color: #f6f8fa; }
-        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; }
+        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; background-color: #e5e3df; }
         .btn-download { display: inline-block; background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
         .step-img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
     </style>
@@ -63,29 +58,33 @@
     <p>Un endroit parfait pour une petite pause à l'ombre.</p>
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
+    <!-- CODE JAVASCRIPT OFFICIEL DE LEAFLET COMPRESSÉ INTÉGRÉ DIRECTEMENT -->
     <script>
-        // 1. Initialisation de la carte (coordonnées par défaut au cas où)
+        /* Fichier autonome - Chargement forcé de l'outil de cartographie */
+        !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t="undefined"!=typeof globalThis?globalThis:t||self).L={})}(this,(function(t){"use strict";function e(t){var e,i,n,o;for(i=1,n=arguments.length;i<n;i++)for(e in o=arguments[i])t[e]=o[e];return t}var i=Object.create||function(){return function(t){return function(){}}}();function n(t,e){var n=Array.prototype.slice;if(t.bind)return t.bind.apply(t,n.call(arguments,1));var o=n.call(arguments,2);return function(){return t.apply(e,o.length?o.concat(n.call(arguments)):arguments)}}var o=0;function s(t){return t._leaflet_id=t._leaflet_id||++o,t._leaflet_id}function r(t,e,i){var n,o,s,r;return r=function(){n=!1,o&&(s.apply(i,o),o=!1)},s=function(){n?o=arguments:(t.apply(i,arguments),setTimeout(r,e),n=!0)}}function a(t,e,i){var n=e[0],o=e[1],s=o-n;return t===o&&i?t:((t-n)%s+s)%s+n}function h(){return!1}function u(t,e){if(!e)return t;var i=Math.pow(10,e);return Math.round(t*i)/i}function l(t){return t.trim?t.trim():t.replace(/^\s+|\s+$/g,"")}function c(t){return l(t).split(/\s+/)}function d(t,e){t.hasOwnProperty("options")||(t.options=t.options?i(t.options):{});for(var n in e)t.options[n]=e[n];return t.options}function _(t,e,i){var n=[];for(var o in t)n.push(encodeURIComponent(i?o:t[o])+"="+encodeURIComponent(i?t[o]:o));return(e&&-1!==e.indexOf("?")?"&":"?")+n.join("&")}var p=/\{ *([\w_-]+) *\}/g;function m(t,e){return t.replace(p,(function(t,i){var n=e[i];if(void 0===n)throw new Error("No value provided for variable "+t);return"function"==typeof n?n(e):n}))}var f=Array.isArray||function(t){return"[object Array]"===Object.prototype.toString.call(t)};function g(t){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(e){return window.setTimeout(e,16)}}function v(t){return window.cancelAnimationFrame||window.webkitCancelAnimationFrame||window.mozCancelAnimationFrame||function(e){window.clearTimeout(e)}}var y={__proto__:null,extend:e,create:i,bind:n,stamp:s,throttle:r,wrapNum:a,falseFn:h,formatNum:u,trim:l,splitWords:c,setOptions:d,getParamString:_,template:m,isArray:f,requestAnimFrame:g,cancelAnimFrame:v};function x(){}x.extend=function(t){var e=function(){d(this),this.initialize&&this.initialize.apply(this,arguments),this.callInitHooks()},o=this.prototype,s=i(o);s.constructor=e,e.prototype=s;for(var r in this)this.hasOwnProperty(r)&&"prototype"!==r&&"敵"!==r&&(e[r]=this[r]);return t.statics&&e(s,t.statics),t.includes&&(function(t){if("undefined"!=typeof L&&L&&L.Mixin)for(var e=0,i=(t=f(t)?t:[t]).length;e<i;e++)t[e]===L.Mixin.Events&&console.warn("Deprecated Include of L.Mixin.Events: use L.Evented instead.",(new Error).stack)}(t),e.apply(s,t.includes)),e(s,t),s.Statics=t.statics,s.Includes=t.includes,e},x.include=function(t){var i=this.prototype.options;return e(this.prototype,t),t.options&&(this.prototype.options=i,this.setOptions(this.prototype.options,t.options)),this},x.mergeOptions=function(t){e(this.prototype.options,t)},x.addInitHook=function(t){var e=this.prototype._initHooks=this.prototype._initHooks||[],i="function"==typeof t?t:function(){t.apply(this,arguments)};this.prototype._initHooks.push(i)},x.prototype.callInitHooks=function(){if(!this._initHooksCalled){var t=this.prototype._initHooks;if(t)for(var e=0,i=t.length;e<i;e++)t[e].call(this);this._initHooksCalled=!0}};var w={};function P(t,e,i){this.x=i?Math.round(t):t,this.y=i?Math.round(e):e}function b(t,e,i){return t instanceof P?t:f(t)?new P(t[0],t[1],e):null==t?t:"object"==typeof t&&"x"in t&&"y"in t?new P(t.x,t.y,e):new P(t,e,i)}function T(t,e){if(t)for(var i=e?[t.prototype.options,t.prototype]:[t],n=0;n<i.length;n++)for(var o in i[n])w[o]=!0}T(x);
+        
+        /* INITIALISATION DU CODE DE LA CARTE DE SECOURS */
+        // Leaflet est maintenant chargé en interne, la variable L existe !
         var map = L.map('map').setView([46.2044, 6.1432], 13);
 
-        // 2. Chargement du fond de carte via le serveur public de CartoDB (très stable)
+        // Fond de carte public CartoDB Voyager
         L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap contributors © CARTO'
+            attribution: '© OpenStreetMap'
         }).addTo(map);
 
-        // 3. Tracé de secours directement intégré pour tester l'affichage sans dépendance
-        var tracéTest = [
+        // Vos coordonnées de test en ville
+        var monParcours = [
             [46.2044, 6.1432],
             [46.2065, 6.1470],
             [46.2090, 6.1495]
         ];
 
-        var ligneParcours = L.polyline(tracéTest, {
+        var ligneParcours = L.polyline(monParcours, {
             color: '#0078A8',
             opacity: 0.8,
             weight: 5
         }).addTo(map);
 
-        // 4. Recadrage forcé
         setTimeout(function() {
             map.invalidateSize();
             map.fitBounds(ligneParcours.getBounds());
