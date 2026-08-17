@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Itinéraire Urbain</title> 
 
-    <!-- 1. CSS de Leaflet -->
+    <!-- 1. Importation propre des outils de la carte -->
     <link rel="stylesheet" href="https://unpkg.com" />
-
-    <!-- 2. Script JavaScript de Leaflet -->
     <script src="https://unpkg.com"></script>
-
-    <!-- 3. Script Leaflet-GPX pour la lecture du tracé -->
-    <script src="https://cloudflare.com"></script>
 
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #24292f; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.5; }
@@ -64,34 +59,35 @@
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
     <script>
-        // 1. Initialisation de la carte centrée par défaut (coordonnées neutres)
-        var map = L.map('map').setView([46.8, 7.1], 8);
+        // 1. Initialisation de la carte (coordonnées de départ temporaires)
+        var map = L.map('map').setView([46.2044, 6.1432], 13);
 
-        // 2. Chargement du fond de carte OpenStreetMap
+        // 2. Chargement du fond de carte OpenStreetMap (Tuiles)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // 3. Lien brut absolu vers votre fichier GPX hébergé chez GitHub
-        var gpxFile = 'https://githubusercontent.com'; 
-        
-        new L.GPX(gpxFile, {
-            async: true,
-            polyline_options: {
-                color: '#0078A8',
-                opacity: 0.8,
-                weight: 5,
-                lineCap: 'round'
-            }
-        }).on('loaded', function(e) {
-            // Ajustement automatique immédiat de la vue sur votre tracé en ville
-            setTimeout(function() {
-                map.invalidateSize();
-                map.fitBounds(e.target.getBounds());
-            }, 100);
-        }).on('error', function(e) {
-            console.error("Erreur de chargement du fichier GPX distant.");
+        // 3. VOS COORDONNÉES (Intégrées directement ici pour éviter les blocages de fichiers)
+        // Format Leaflet : [Latitude, Longitude]
+        var monParcours = [
+            [46.2044, 6.1432], // Point 1 (Ex: Place de la Mairie)
+            [46.2065, 6.1470], // Point 2 (Ex: Fontaine historique)
+            [46.2090, 6.1495]  // Point 3 (Ex: Parc Central)
+        ];
+
+        // 4. Dessin du tracé bleu sur la carte
+        var ligneParcours = L.polyline(monParcours, {
+            color: '#0078A8',
+            opacity: 0.8,
+            weight: 5,
+            lineCap: 'round'
         }).addTo(map);
+
+        // 5. Centrage automatique forcé de la carte sur votre tracé urbain
+        setTimeout(function() {
+            map.invalidateSize();
+            map.fitBounds(ligneParcours.getBounds());
+        }, 200);
     </script>
 </body>
 </html>
