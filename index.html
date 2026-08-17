@@ -11,7 +11,7 @@
     <!-- 2. Script JavaScript de Leaflet -->
     <script src="https://unpkg.com"></script>
 
-    <!-- 3. Script Leaflet-GPX -->
+    <!-- 3. Script Leaflet-GPX pour la lecture du tracé -->
     <script src="https://cloudflare.com"></script>
 
     <style>
@@ -64,16 +64,16 @@
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
     <script>
-        // 1. On donne des coordonnées de base pour forcer la carte à s'afficher (ici Paris)
-        var map = L.map('map').setView([48.8566, 2.3522], 13);
+        // 1. Initialisation de la carte centrée par défaut (coordonnées neutres)
+        var map = L.map('map').setView([46.8, 7.1], 8);
 
-        // 2. Chargement immédiat du fond de carte
+        // 2. Chargement du fond de carte OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // 3. Essai de lecture du fichier GPX
-        var gpxFile = './TestGH.gpx'; 
+        // 3. Lien brut absolu vers votre fichier GPX hébergé chez GitHub
+        var gpxFile = 'https://githubusercontent.com'; 
         
         new L.GPX(gpxFile, {
             async: true,
@@ -84,10 +84,13 @@
                 lineCap: 'round'
             }
         }).on('loaded', function(e) {
-            // Si le fichier se charge bien, on recadre la carte dessus
-            map.fitBounds(e.target.getBounds());
+            // Ajustement automatique immédiat de la vue sur votre tracé en ville
+            setTimeout(function() {
+                map.invalidateSize();
+                map.fitBounds(e.target.getBounds());
+            }, 100);
         }).on('error', function(e) {
-            console.error("Erreur de chargement du fichier GPX:", e);
+            console.error("Erreur de chargement du fichier GPX distant.");
         }).addTo(map);
     </script>
 </body>
