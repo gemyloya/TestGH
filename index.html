@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Itinéraire Urbain</title> 
 
-    <!-- 1. Importation propre des outils de la carte -->
+    <!-- Liens officiels Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com" />
     <script src="https://unpkg.com"></script>
 
@@ -14,7 +14,8 @@
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { border: 1px solid #d0d7de; padding: 12px; text-align: left; }
         th { background-color: #f6f8fa; }
-        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; background-color: #e5e3df; }
+        /* Le fond gris par défaut est supprimé pour voir si les tuiles chargent */
+        #map { height: 450px; width: 100%; border-radius: 8px; border: 1px solid #d0d7de; margin: 20px 0; }
         .btn-download { display: inline-block; background-color: #21262d; color: #c9d1d9; border: 1px solid #30363d; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
         .step-img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
     </style>
@@ -59,35 +60,33 @@
     <img src="etape2.jpeg" alt="Photo du parc" class="step-img">
 
     <script>
-        // 1. Initialisation de la carte (coordonnées de départ temporaires)
+        // 1. Initialisation de la carte sur des coordonnées par défaut
         var map = L.map('map').setView([46.2044, 6.1432], 13);
 
-        // 2. Chargement du fond de carte OpenStreetMap (Tuiles)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+        // 2. Serveur de tuiles alternatif (CartoDB Voyager) - Autorise GitHub Pages sans blocage
+        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors © CARTO'
         }).addTo(map);
 
-        // 3. VOS COORDONNÉES (Intégrées directement ici pour éviter les blocages de fichiers)
-        // Format Leaflet : [Latitude, Longitude]
+        // 3. Tracé de démonstration
         var monParcours = [
-            [46.2044, 6.1432], // Point 1 (Ex: Place de la Mairie)
-            [46.2065, 6.1470], // Point 2 (Ex: Fontaine historique)
-            [46.2090, 6.1495]  // Point 3 (Ex: Parc Central)
+            [46.2044, 6.1432],
+            [46.2065, 6.1470],
+            [46.2090, 6.1495]
         ];
 
-        // 4. Dessin du tracé bleu sur la carte
+        // 4. Ajout du tracé
         var ligneParcours = L.polyline(monParcours, {
             color: '#0078A8',
             opacity: 0.8,
-            weight: 5,
-            lineCap: 'round'
+            weight: 5
         }).addTo(map);
 
-        // 5. Centrage automatique forcé de la carte sur votre tracé urbain
+        // 5. Ajustement forcé de la taille
         setTimeout(function() {
             map.invalidateSize();
             map.fitBounds(ligneParcours.getBounds());
-        }, 200);
+        }, 300);
     </script>
 </body>
 </html>
