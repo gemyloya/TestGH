@@ -19,3 +19,4 @@ Le parcours est consultable en ligne ici :
 
 ## 📥 Téléchargement
 Vous pouvez récupérer directement le fichier de tracé `./TestGH.gpx` présent dans ce dépôt pour l'importer sur votre montre connectée ou votre application de randonnée préférée.
+ 
